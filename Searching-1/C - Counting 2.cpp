@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
     vector<int> searchRange(vector<int>& nums, vector<int> query) {
+        sort(nums.begin(),nums.end());
         for(int i=0;i<query.size();i++){
             int q=query[i];
             int ans=INT_MIN;
