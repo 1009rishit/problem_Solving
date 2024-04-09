@@ -19,27 +19,35 @@ public:
     }  
     void insert(string word) {
         TrieNode *p=root;
-        for(auto &a:word){
-            int i=a-'a';
-            if(!p->children[i]) p->children[i]=new TrieNode();
-            p=p->children[i];
+        for(int i=0;i<word.length();i++){
+            char ch=word[i];
+            if(p->children[ch-'a']==NULL){
+            p->children[ch-'a']=new TrieNode();
+            }
+            p=p->children[ch-'a'];
         }
         p->terminal=true;
     }
     
-    bool search(string word,bool prefix=false){
+    bool search(string word){
         TrieNode *p=root;
-        for(auto &a:word){
-            int i=a-'a';
-            if(!p->children[i]) return false;
-            p=p->children[i];
+        for(int i=0;i<word.length();i++){
+            char ch=word[i];
+            if(p->children[ch-'a']==NULL) return false;
+            p=p->children[ch-'a'];
         }
-        if(prefix==false) return p->terminal;
-        return true;
+        if(p->terminal) return true;
+        return false;
     }
     
     bool startsWith(string prefix) {
-        return search(prefix,true);
+        TrieNode *p=root;
+        for(int i=0;i<prefix.length();i++){
+            char ch=prefix[i];
+            if(p->children[ch-'a']==NULL) return false;
+            p=p->children[ch-'a'];
+        }
+        return true;
     }
 };
 
