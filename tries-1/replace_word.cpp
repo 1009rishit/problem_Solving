@@ -43,13 +43,11 @@ string search(string word){
         for(auto s : dict) insert(s);
         istringstream ss(sentence);
         string word = "", ans="";
-        
-        for(; ss>>word; ){
+        while(ss>>word){
             ans += search(word);
             ans += ' ';
         }
         ans.pop_back();
-        
         return ans;
     }
 };
